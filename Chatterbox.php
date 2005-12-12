@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.1 2005/12/10 00:20:15 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.2 2005/12/12 12:37:20 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1 $
+ * @version  $Revision: 1.2 $
  * @package  chatterbox
  */
 
@@ -50,7 +50,9 @@ class Chatterbox extends BitBase {
 	}
 
 	function getList( &$pListHash ) {
+		global $gBitUser;
 		$bindVars = array();
+		$ret['users'] = array();
 		$ret['data'] = array();
 		$ret['cant'] = array();
 		// deal with sort_mode before prepGetList();
@@ -70,16 +72,21 @@ class Chatterbox extends BitBase {
 		}
 
 		$query = "SELECT tcb.*,
-			uu.`login` AS creator_user, uu.`real_name` AS creator_real_name
+			uu.`login`, uu.`real_name`
 			FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb
 			LEFT JOIN `".BIT_DB_PREFIX."users_users` uu ON ( uu.`user_id` = tcb.`user_id` ) $where $order";
 		$result = $this->mDb->query( $query, $bindVars, $pListHash['max_records'], $pListHash['offset'] );
 
 		while( !$result->EOF ) {
+			// logout grace period of 2 mins
 			$aux = $result->fields;
 			if( !empty( $aux['user_id'] ) ) {
-				$aux['author'] = ( isset( $result->fields['creator_real_name'] ) ? $result->fields['creator_real_name'] : $result->fields['creator_user'] );
+				$aux['author'] = $gBitUser->getDisplayName( FALSE, $aux );
 			}
+			if( $aux['created'] >= ( $this->mDate->getUTCTime() - 180 ) ) {
+				$ret['users'][] = $aux['author'];
+			}
+			$time = $this->mDate->getUTCTime() - 120;
 			$ret['data'][$aux['chatterbox_id']] = $aux;
 			$result->MoveNext();
 		}
@@ -87,14 +94,6 @@ class Chatterbox extends BitBase {
 		$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";
 		$ret['cant'] = $this->mDb->getOne( $query );
 
-		return $ret;
-	}
-
-	function convertToString( $pHash ) {
-		$ret = array();
-		if( !empty( $pHash ) && is_array( $pHash ) ) {
-			$ret = $pHash['chatterbox_id'].' ---'.$pHash['author'].' ---'.( $this->mDate->date( " [ H:i ] ", $pHash['created'] ) ).' ---'.$pHash['data'].' ---';
-		}
 		return $ret;
 	}
 
@@ -132,21 +131,7 @@ class Chatterbox extends BitBase {
 
 	function cleanupString( $pString=NULL, $pStrlen=500 ) {
 		if( !empty( $pString ) ) {
-			$find[]    = "\'";
-			$replace[] = "'";
-
-			$find[]    = "'";
-			$replace[] = "\'";
-
-			$find[]    = "---";
-			$replace[] = " - - ";
-
-			// tidy up strings from form
-			for( $i = 0; $i < count( $find ); $i++ ) {
-				$pString = str_replace( $find[$i], $replace[$i], $pString );
-			}
-
-			// truncate it too long
+			// truncate if it's too long
 			if( strlen( $pString ) > $pStrlen ) {
 				$pString = substr( $pString, 0, $pStrlen ); 
 			}

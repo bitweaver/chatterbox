@@ -5,6 +5,9 @@ $gBitSystem->verifyPermission( 'bit_p_use_chatterbox' );
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 $gChatterbox = new Chatterbox();
 $gChatterbox->pruneList( $gBitSystem->getPreference( 'prune_threshold', 604800 ) );
+
+// Load common ajax library
+$gBitSmarty->assign( 'loadAjax', TRUE );
 // display template
 $gBitSystem->display( 'bitpackage:chatterbox/chatterbox.tpl', tra( 'Chat' ) );
 ?>

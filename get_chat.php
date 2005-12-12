@@ -17,8 +17,7 @@ $listHash = array(
 );
 $chatter = $gChatterbox->getList( $listHash );
 // we need to sort the array by chatterbox_id (set as keys of array)
-ksort( $chatter['data'] );
-foreach( $chatter['data'] as $line ) {
-	echo( $gChatterbox->convertToString( $line ) );
-}
+$gBitSmarty->assign( 'chatter', $chatter['data'] );
+
+echo $gBitSmarty->fetch( 'bitpackage:chatterbox/chatter.tpl' );
 ?>
