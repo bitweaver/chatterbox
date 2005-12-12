@@ -24,9 +24,7 @@
 
 number of items: {$chatterbox.cant}
 <ul class="data">
-	{foreach from=$chatterbox.data item=line}
-		<li class="item {cycle values='odd,even'}"><span class="date">{$line.created|bit_short_datetime}</span> <span class="username">{$line.author}</span> {$line.data}</li>
-	{/foreach}
+	{include file="bitpackage:chatterbox/chatter_inc.tpl" chatter=$chatterbox.data datetime=TRUE}
 </ul>
 
 {libertypagination curPage=$curPage numPages=$numPages offset=$offset page=$page}

@@ -22,6 +22,6 @@ if( !empty( $chatter['data'] ) ) {
 	$ids = array_keys( $chatter['data'] );
 	echo $ids[0];
 	echo '||||';
-	echo $gBitSmarty->fetch( 'bitpackage:chatterbox/chatter.tpl' );
+	echo $gBitSmarty->fetch( 'bitpackage:chatterbox/chatter_inc.tpl' );
 }
 ?>

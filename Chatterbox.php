@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.3 2005/12/12 17:09:24 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.4 2005/12/12 17:31:09 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.3 $
+ * @version  $Revision: 1.4 $
  * @package  chatterbox
  */
 
@@ -54,7 +54,6 @@ class Chatterbox extends BitBase {
 		$bindVars = array();
 		$ret['users'] = array();
 		$ret['data'] = array();
-		$ret['cant'] = array();
 		// deal with sort_mode before prepGetList();
 		if( !empty( $pListHash['sort_mode'] ) ) {
 			$order = " ORDER BY ".$this->mDb->convert_sortmode( $pListHash['sort_mode'] );
@@ -93,7 +92,7 @@ class Chatterbox extends BitBase {
 
 		$ret['users'] = array_unique( $ret['users'] );
 
-		if( !empty( $listHash['get_count'] ) ) {
+		if( !empty( $pListHash['get_count'] ) ) {
 			$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";
 			$ret['cant'] = $this->mDb->getOne( $query );
 		}

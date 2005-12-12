@@ -16,5 +16,5 @@ $listHash = array(
 );
 $chatter = $gChatterbox->getList( $listHash );
 $gBitSmarty->assign( 'users', $chatter['users'] );
-echo $gBitSmarty->fetch( 'bitpackage:chatterbox/users.tpl' );
+echo $gBitSmarty->fetch( 'bitpackage:chatterbox/users_inc.tpl' );
 ?>
