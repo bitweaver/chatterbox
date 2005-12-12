@@ -3,6 +3,8 @@ function initChatterbox() {
 	focus( 'chatbarText' );
 	checkStatus( '' );
 	refreshChat();
+	$( 'chatbarText' ).value = "------- has joined the chat -------";
+	sendComment();
 	new PeriodicalExecuter( refreshChat, refresh_timeout );
 }
 function refreshChat() {
@@ -21,6 +23,7 @@ function sendComment() {
 	var data = "author="+$F( 'chatName' )+"&data="+$F( 'chatbarText' );
 	new Ajax.Request( send_chat, { parameters: data, onFailure: errorResponse } );
 	$( 'chatbarText' ).value = '';
+	$( 'chatbarText' ).focus();
 }
 function checkStatus( focusState ) {
 	if ($F( 'chatbarText' ) != '' || focusState == 'active') {

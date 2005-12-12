@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.4 2005/12/12 17:31:09 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.5 2005/12/12 17:54:10 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.4 $
+ * @version  $Revision: 1.5 $
  * @package  chatterbox
  */
 
@@ -43,7 +43,7 @@ class Chatterbox extends BitBase {
 		$this->mDate = new BitDate(0);
 	}
 
-	function store( &$pParamHash ) {	
+	function store( &$pParamHash ) {
 		if( $this->verify( $pParamHash ) ) {
 			$result = $this->mDb->associateInsert( BIT_DB_PREFIX."bit_chatterbox", $pParamHash['chatterbox_store'] );
 		}
@@ -136,11 +136,11 @@ class Chatterbox extends BitBase {
 		if( !empty( $pString ) ) {
 			// truncate if it's too long
 			if( strlen( $pString ) > $pStrlen ) {
-				$pString = substr( $pString, 0, $pStrlen ); 
+				$pString = substr( $pString, 0, $pStrlen );
 			}
 
 			//to allow for linebreaks a space is inserted every 50 letters
-			$pString = preg_replace( "/([^\s]{50})/", "$1 ",$pString );
+			$pString = htmlspecialchars( preg_replace( "/([^\s]{50})/", "$1 ",$pString ) );
 
 		}
 		return $pString;
