@@ -1,21 +1,21 @@
-last_id = -1;
 function initChatterbox() {
 	checkName( 'chatName' );
 	focus( 'chatbarText' );
 	checkStatus( '' );
 	refreshChat();
-	new PeriodicalExecuter( refreshChat, get_timeout );
+	new PeriodicalExecuter( refreshChat, refresh_timeout );
 }
 function refreshChat() {
-	var data = "&last_id="+last_id;
+	var data = "&last_id="+$F( 'last_id' );
 	new Ajax.Request( get_chat, { parameters: data, onSuccess: insertLines, onFailure: errorResponse } );
-	new Ajax.Request( get_id, { onSuccess: setId, onFailure: errorResponse } );
-}
-function setId( t ) {
-	last_id = t.responseText;
+	new Ajax.Updater( 'outputUsers', get_users, { parameters: data } );
 }
 function insertLines( t ) {
-	new Insertion.Top( 'outputChat', t.responseText );
+	if( t.responseText != '' ) {
+		res = t.responseText.split( '||||' );
+		$( 'last_id' ).value = res[0];
+		new Insertion.Top( 'outputChat', res[1] );
+	}
 }
 function sendComment() {
 	var data = "author="+$F( 'chatName' )+"&data="+$F( 'chatbarText' );

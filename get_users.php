@@ -13,15 +13,8 @@ $gChatterbox = new Chatterbox();
 
 $listHash = array(
 	'max_records' => !empty( $_REQUEST['max_records'] ) ? $_REQUEST['max_records'] : 60,
-	'last_id' => !empty( $_REQUEST['last_id'] ) ? $_REQUEST['last_id'] : -1,
 );
 $chatter = $gChatterbox->getList( $listHash );
-$gBitSmarty->assign( 'chatter', $chatter['data'] );
-
-if( !empty( $chatter['data'] ) ) {
-	$ids = array_keys( $chatter['data'] );
-	echo $ids[0];
-	echo '||||';
-	echo $gBitSmarty->fetch( 'bitpackage:chatterbox/chatter.tpl' );
-}
+$gBitSmarty->assign( 'users', $chatter['users'] );
+echo $gBitSmarty->fetch( 'bitpackage:chatterbox/users.tpl' );
 ?>

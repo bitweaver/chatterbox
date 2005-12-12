@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.1 2005/12/10 00:20:15 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.2 2005/12/12 17:09:25 squareing Exp $
 
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 
@@ -14,6 +14,7 @@ $listHash = array(
 	'page' => !empty( $_REQUEST['curPage'] ) ? $_REQUEST['curPage'] : 1,
 	'max_records' => !empty( $_REQUEST['max_records'] ) ? $_REQUEST['max_records'] : 60,
 	'last_id' => !empty( $_REQUEST['last_id'] ) ? $_REQUEST['last_id'] : -1,
+	'get_count' => TRUE,
 );
 $chatterbox = $gChatterbox->getList( $listHash );
 $gBitSmarty->assign( 'chatterbox', $chatterbox );

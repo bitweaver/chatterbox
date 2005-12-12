@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.2 2005/12/12 12:37:20 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.3 2005/12/12 17:09:24 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.2 $
+ * @version  $Revision: 1.3 $
  * @package  chatterbox
  */
 
@@ -86,13 +86,17 @@ class Chatterbox extends BitBase {
 			if( $aux['created'] >= ( $this->mDate->getUTCTime() - 180 ) ) {
 				$ret['users'][] = $aux['author'];
 			}
-			$time = $this->mDate->getUTCTime() - 120;
+			$time = $this->mDate->getUTCTime() - 180;
 			$ret['data'][$aux['chatterbox_id']] = $aux;
 			$result->MoveNext();
 		}
 
-		$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";
-		$ret['cant'] = $this->mDb->getOne( $query );
+		$ret['users'] = array_unique( $ret['users'] );
+
+		if( !empty( $listHash['get_count'] ) ) {
+			$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";
+			$ret['cant'] = $this->mDb->getOne( $query );
+		}
 
 		return $ret;
 	}
