@@ -3,7 +3,7 @@ function initChatterbox() {
 	focus( 'chatbarText' );
 	checkStatus( '' );
 	refreshChat();
-	$( 'chatbarText' ).value = "------- has joined the chat -------";
+	//$( 'chatbarText' ).value = "------- has joined the chat -------";
 	sendComment();
 	new PeriodicalExecuter( refreshChat, refresh_timeout );
 }
