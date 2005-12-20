@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.5 2005/12/12 17:54:10 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.6 2005/12/20 18:37:44 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.5 $
+ * @version  $Revision: 1.6 $
  * @package  chatterbox
  */
 
@@ -64,7 +64,7 @@ class Chatterbox extends BitBase {
 		$this->prepGetList( $pListHash );
 
 		$where = " WHERE chatterbox_id > ? ";
-		if( !empty( $pListHash['last_id'] ) ) {
+		if( @$this->verifyId( $pListHash['last_id'] ) ) {
 			$bindVars[] = $pListHash['last_id'];
 		} else {
 			$bindVars[] = -1;
@@ -79,7 +79,7 @@ class Chatterbox extends BitBase {
 		while( !$result->EOF ) {
 			// logout grace period of 2 mins
 			$aux = $result->fields;
-			if( !empty( $aux['user_id'] ) ) {
+			if( @$this->verifyId( $aux['user_id'] ) ) {
 				$aux['author'] = $gBitUser->getDisplayName( FALSE, $aux );
 			}
 			if( $aux['created'] >= ( $this->mDate->getUTCTime() - 180 ) ) {
