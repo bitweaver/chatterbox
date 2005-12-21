@@ -17,11 +17,14 @@ $listHash = array(
 );
 $chatter = $gChatterbox->getList( $listHash );
 $gBitSmarty->assign( 'chatter', $chatter['data'] );
+$gBitSmarty->assign( 'users', $chatter['users'] );
 
 if( !empty( $chatter['data'] ) ) {
 	$ids = array_keys( $chatter['data'] );
 	echo $ids[0];
 	echo '||||';
 	echo $gBitSmarty->fetch( 'bitpackage:chatterbox/chatter_inc.tpl' );
+	echo '||||';
+	echo $gBitSmarty->fetch( 'bitpackage:chatterbox/users_inc.tpl' );
 }
 ?>

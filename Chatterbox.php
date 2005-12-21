@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.7 2005/12/21 08:24:05 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.8 2005/12/21 19:47:56 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 1.8 $
  * @package  chatterbox
  */
 
@@ -51,7 +51,6 @@ class Chatterbox extends BitBase {
 
 	function getList( &$pListHash ) {
 		global $gBitUser, $gBitSystem;
-		$bindVars = array();
 		$ret['users'] = array();
 		$ret['data'] = array();
 		// deal with sort_mode before prepGetList();
@@ -63,21 +62,17 @@ class Chatterbox extends BitBase {
 
 		$this->prepGetList( $pListHash );
 
-		$where = " WHERE chatterbox_id > ? ";
-		if( @$this->verifyId( $pListHash['last_id'] ) ) {
-			$bindVars[] = $pListHash['last_id'];
-		} else {
-			$bindVars[] = -1;
+		if( !@$this->verifyId( $pListHash['last_id'] ) ) {
+			$pListHash['last_id'] = -1;
 		}
 
 		$query = "SELECT tcb.*,
 			uu.`login`, uu.`real_name`
 			FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb
-			LEFT JOIN `".BIT_DB_PREFIX."users_users` uu ON ( uu.`user_id` = tcb.`user_id` ) $where $order";
-		$result = $this->mDb->query( $query, $bindVars, $pListHash['max_records'], $pListHash['offset'] );
+			LEFT JOIN `".BIT_DB_PREFIX."users_users` uu ON ( uu.`user_id` = tcb.`user_id` ) $order";
+		$result = $this->mDb->query( $query, array(), $pListHash['max_records'], $pListHash['offset'] );
 
 		while( !$result->EOF ) {
-			// logout grace period of 2 mins
 			$aux = $result->fields;
 			if( @$this->verifyId( $aux['user_id'] ) ) {
 				$aux['author'] = $gBitUser->getDisplayName( FALSE, $aux );
@@ -85,12 +80,14 @@ class Chatterbox extends BitBase {
 			if( $aux['created'] >= ( $this->mDate->getUTCTime() - $gBitSystem->getPreference( 'online_user_timeout', 180 ) ) ) {
 				$ret['users'][] = $aux['author'];
 			}
-			$time = $this->mDate->getUTCTime() - 180;
-			$ret['data'][$aux['chatterbox_id']] = $aux;
+			if( $aux['chatterbox_id'] > $pListHash['last_id'] ) {
+				$ret['data'][$aux['chatterbox_id']] = $aux;
+			}
 			$result->MoveNext();
 		}
 
 		$ret['users'] = array_unique( $ret['users'] );
+		asort( $ret['users'] );
 
 		if( !empty( $pListHash['get_count'] ) ) {
 			$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";

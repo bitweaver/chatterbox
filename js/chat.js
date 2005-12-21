@@ -10,13 +10,13 @@ function initChatterbox() {
 function refreshChat() {
 	var data = "&last_id="+$F( 'last_id' );
 	new Ajax.Request( get_chat, { parameters: data, onSuccess: insertLines, onFailure: errorResponse } );
-	new Ajax.Updater( 'outputUsers', get_users, { parameters: data } );
 }
 function insertLines( t ) {
 	if( t.responseText != '' ) {
 		res = t.responseText.split( '||||' );
 		$( 'last_id' ).value = res[0];
 		new Insertion.Top( 'outputChat', res[1] );
+		$( 'outputUsers' ).innerHTML = res[2];
 	}
 }
 function sendComment() {
