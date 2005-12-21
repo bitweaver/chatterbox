@@ -9,10 +9,14 @@
 		<a name="chat"></a>
 		{form id="chatForm" onsubmit="return false;" action="#"}
 			<input type="hidden" id="last_id" name="last_id" value="-1" />
-			<input type="text" size="12" maxlength="30" name="name" id="chatName" {if $gBitUser->isRegistered()}value="{displayname hash=$gBitUser->mInfo nolink=1}" onblur="checkName();" disabled="disabled"{/if} />
+			{if $gBitUser->isRegistered()}
+				<input type="hidden" name="name" id="chatName" value="{displayname hash=$gBitUser->mInfo nolink=1}" />&lt;{displayname hash=$gBitUser->mInfo nolink=1}&gt;
+			{else}
+				<input type="text" size="12" maxlength="30" name="name" id="chatName" onblur="checkName();" />
+			{/if}
 			<input type="text" size="55" name="chatbarText" id="chatbarText" onblur="checkStatus('');" onfocus="checkStatus('active');" />
 			<input onclick="sendComment();" type="submit" id="chatSubmit" name="submit" value="submit" />
-			{formhelp note="After submitting, your message might take a couple of seconds before it appears."}
+			{formhelp note="After submitting your message, it might take a couple of seconds before it appears."}
 		{/form}
 
 		<div class="chathistory">

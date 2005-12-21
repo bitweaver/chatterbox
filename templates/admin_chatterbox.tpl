@@ -10,6 +10,14 @@
 	</div>
 
 	<div class="row">
+		{formlabel label="Online User Timeout" for="timeout"}
+		{forminput}
+			<input type="text" size="5" name="online_user_timeout" id="timeout" value="{$gBitSystemPrefs.online_user_timeout|default:180}" /> {tr}seconds{/tr}
+			{formhelp note="If a user is inactive for this number of seconds, he will be removed from the active users list."}
+		{/forminput}
+	</div>
+
+	<div class="row">
 		{formlabel label="Clear Logs" for="clear_logs"}
 		{forminput}
 			<input type="checkbox" name="clear_logs" id="clear_logs" />

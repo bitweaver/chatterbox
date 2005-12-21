@@ -6,8 +6,8 @@
 		{else}
 			<span class="date">{$line.created|bit_short_time} </span>
 		{/if}
-		<span class="username">{$line.author} </span>
-		<span class="chatline">{$line.data}</span>
+		<span class="username">&lt;{$line.author}&gt;</span> <span class="chatline">{$line.data}</span>
+		<div class="clear"></div>
 	</li>
 {/foreach}
 {/strip}

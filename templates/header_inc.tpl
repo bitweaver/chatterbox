@@ -1,4 +1,4 @@
-{if $smary.const.ACTIVE_PACKAGE eq "chatterbox"}
+{if $smarty.const.ACTIVE_PACKAGE eq "chatterbox"}
 	<script type="text/javascript">
 		var refresh_timeout = 4;
 		var get_chat  = "{$smarty.const.CHATTERBOX_PKG_URL}get_chat.php";
