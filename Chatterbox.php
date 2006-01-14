@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.8 2005/12/21 19:47:56 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.9 2006/01/14 09:46:38 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.8 $
+ * @version  $Revision: 1.9 $
  * @package  chatterbox
  */
 
@@ -126,7 +126,7 @@ class Chatterbox extends BitBase {
 	// remove all entries older than duration
 	// defaults to one week
 	function pruneList( $pPeriod=604800 ) {
-		$result = $this->mDb->query( "DELETE FROM ".BIT_DB_PREFIX."bit_chatterbox WHERE created < ?", array( $this->mDate->getUTCTime() - $pPeriod ) );
+		$result = $this->mDb->query( "DELETE FROM `".BIT_DB_PREFIX."bit_chatterbox` WHERE created < ?", array( $this->mDate->getUTCTime() - $pPeriod ) );
 	}
 
 	function cleanupString( $pString=NULL, $pStrlen=500 ) {
