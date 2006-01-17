@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.3 2005/12/21 08:24:06 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.4 2006/01/17 00:23:56 squareing Exp $
 
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 
@@ -28,7 +28,7 @@ $numPages = ceil( $chatterbox['cant'] / $listHash['max_records'] );
 $gBitSmarty->assign( 'numPages', $numPages );
 
 $pruneThreshold = array(
-	'0'         => tra( 'None' ),
+	'-1'        => tra( 'None' ),
 	'3600'      => tra( 'Hour' ),
 	'86400'     => tra( 'Day' ),
 	'604800'    => tra( 'Week' ),
