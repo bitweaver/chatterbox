@@ -1,6 +1,6 @@
 <?php
 $tables = array(
-	'bit_chatterbox' => "
+	'chatterbox' => "
 		chatterbox_id I4 AUTO PRIMARY,
 		user_id I4 NULL,
 		channel C(40),

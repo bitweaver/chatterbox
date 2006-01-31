@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.10 2006/01/16 16:39:41 lsces Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.11 2006/01/31 20:16:46 bitweaver Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.10 $
+ * @version  $Revision: 1.11 $
  * @package  chatterbox
  */
 
@@ -45,7 +45,7 @@ class Chatterbox extends BitBase {
 
 	function store( &$pParamHash ) {
 		if( $this->verify( $pParamHash ) ) {
-			$result = $this->mDb->associateInsert( BIT_DB_PREFIX."bit_chatterbox", $pParamHash['chatterbox_store'] );
+			$result = $this->mDb->associateInsert( BIT_DB_PREFIX."chatterbox", $pParamHash['chatterbox_store'] );
 		}
 	}
 
@@ -57,7 +57,7 @@ class Chatterbox extends BitBase {
 		if( !empty( $pListHash['sort_mode'] ) ) {
 			$order = " ORDER BY ".$this->mDb->convert_sortmode( $pListHash['sort_mode'] );
 		} else {
-			$order = " ORDER BY tcb.`chatterbox_id` DESC";
+			$order = " ORDER BY cb.`chatterbox_id` DESC";
 		}
 
 		$this->prepGetList( $pListHash );
@@ -66,10 +66,10 @@ class Chatterbox extends BitBase {
 			$pListHash['last_id'] = -1;
 		}
 
-		$query = "SELECT tcb.*,
+		$query = "SELECT cb.*,
 			uu.`login`, uu.`real_name`
-			FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb
-			LEFT JOIN `".BIT_DB_PREFIX."users_users` uu ON ( uu.`user_id` = tcb.`user_id` ) $order";
+			FROM `".BIT_DB_PREFIX."chatterbox` cb
+			LEFT JOIN `".BIT_DB_PREFIX."users_users` uu ON ( uu.`user_id` = cb.`user_id` ) $order";
 		$result = $this->mDb->query( $query, array(), $pListHash['max_records'], $pListHash['offset'] );
 
 		while( !$result->EOF ) {
@@ -90,7 +90,7 @@ class Chatterbox extends BitBase {
 		asort( $ret['users'] );
 
 		if( !empty( $pListHash['get_count'] ) ) {
-			$query = "SELECT COUNT( tcb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."bit_chatterbox` tcb";
+			$query = "SELECT COUNT( cb.`chatterbox_id` ) FROM `".BIT_DB_PREFIX."chatterbox` cb";
 			$ret['cant'] = $this->mDb->getOne( $query );
 		}
 
@@ -126,7 +126,7 @@ class Chatterbox extends BitBase {
 	// remove all entries older than duration
 	// defaults to one week
 	function pruneList( $pPeriod=604800 ) {
-		$result = $this->mDb->query( "DELETE FROM `".BIT_DB_PREFIX."bit_chatterbox` WHERE `created` < ?", array( $this->mDate->getUTCTime() - $pPeriod ) );
+		$result = $this->mDb->query( "DELETE FROM `".BIT_DB_PREFIX."chatterbox` WHERE `created` < ?", array( $this->mDate->getUTCTime() - $pPeriod ) );
 	}
 
 	function cleanupString( $pString=NULL, $pStrlen=500 ) {
