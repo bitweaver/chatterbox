@@ -14,6 +14,7 @@ array( 'DATADICT' => array(
 )),
 		)
 	),
+
 );
 
 if( isset( $upgrades[$gUpgradeFrom][$gUpgradeTo] ) ) {
