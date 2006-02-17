@@ -1,12 +1,17 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.3 $
+ * @version  $Revision: 1.4 $
  * @package  Pigeonholes
  * @subpackage functions
  */
 global $gBitSystem, $gBitUser;
-$gBitSystem->registerPackage( 'chatterbox', dirname( __FILE__).'/' );
+
+$registerHash = array(
+	'package_name' => 'chatterbox',
+	'package_path' => dirname( __FILE__ ).'/',
+);
+$gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'chatterbox' ) ) {
 	if( $gBitUser->hasPermission( 'bit_p_use_chatterbox' ) ) {
