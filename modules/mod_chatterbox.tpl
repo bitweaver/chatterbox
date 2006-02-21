@@ -12,8 +12,8 @@
 			</ul>
 		</div>
 
-		<script type="text/javascript">//<![CDATA[
+		<script type="text/javascript">/* <![CDATA[ */
 			initChatterbox();
-		//]]></script>
+		/* ]]> */</script>
 	{/bitmodule}
 {/if}

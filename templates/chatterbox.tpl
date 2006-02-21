@@ -1,3 +1,4 @@
+{strip}
 <div class="floaticon">{bithelp}</div>
 
 <div class="display chatterbox">
@@ -32,8 +33,9 @@
 			</ul>
 		</div>
 
-		<script type="text/javascript">//<![CDATA[
+		<script type="text/javascript">/* <![CDATA[ */
 			initChatterbox();
-		//]]></script>
+		/* ]]> */</script>
 	</div><!-- end .body -->
 </div><!-- end .chat -->
+{/strip}
