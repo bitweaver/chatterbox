@@ -4,7 +4,7 @@ $gBitSystem->verifyPermission( 'bit_p_use_chatterbox' );
 // we'll do the pruning here - no need to clear out the db on *every* js triggered page load
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 $gChatterbox = new Chatterbox();
-$gChatterbox->pruneList( $gBitSystem->getPreference( 'prune_threshold', 604800 ) );
+$gChatterbox->pruneList( $gBitSystem->getConfig( 'prune_threshold', 604800 ) );
 
 // Load common ajax library
 $gBitSmarty->assign( 'loadAjax', TRUE );

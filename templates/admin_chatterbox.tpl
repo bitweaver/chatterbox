@@ -4,7 +4,7 @@
 	<div class="row">
 		{formlabel label="Keep Chat Logs" for="prune_threshold"}
 		{forminput}
-			{html_options name="prune_threshold" options=$pruneThreshold values=$pruneThreshold selected=`$gBitSystemPrefs.prune_threshold` id=prune_threshold}
+			{html_options name="prune_threshold" options=$pruneThreshold values=$pruneThreshold selected=`$gBitSystem->getConfig('prune_threshold')` id=prune_threshold}
 			{formhelp note="Specify how far back you want to keep your chat logs for. Any entries older than the specified time will automatically be removed from the database."}
 		{/forminput}
 	</div>
@@ -12,7 +12,7 @@
 	<div class="row">
 		{formlabel label="Online User Timeout" for="timeout"}
 		{forminput}
-			<input type="text" size="5" name="online_user_timeout" id="timeout" value="{$gBitSystemPrefs.online_user_timeout|default:180}" /> {tr}seconds{/tr}
+			<input type="text" size="5" name="online_user_timeout" id="timeout" value="{$gBitSystem->getConfig('online_user_timeout')|default:180}" /> {tr}seconds{/tr}
 			{formhelp note="If a user is inactive for this number of seconds, he will be removed from the active users list."}
 		{/forminput}
 	</div>
