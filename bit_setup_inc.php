@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.2.2.1 $
+ * @version  $Revision: 1.2.2.2 $
  * @package  Pigeonholes
  * @subpackage functions
  */
