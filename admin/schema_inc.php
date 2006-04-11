@@ -26,7 +26,7 @@ $gBitInstaller->registerPackageInfo( CHATTERBOX_PKG_NAME, array(
 
 // ### Default UserPermissions
 $gBitInstaller->registerUserPermissions( CHATTERBOX_PKG_NAME, array(
-	array( 'bit_p_use_chatterbox', 'Can use the online chat', 'registered', CHATTERBOX_PKG_NAME ),
+	array( 'p_chatterbox_use', 'Can use the online chat', 'registered', CHATTERBOX_PKG_NAME ),
 ) );
 
 $gBitInstaller->registerPreferences( CHATTERBOX_PKG_NAME, array(

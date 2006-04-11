@@ -1,4 +1,4 @@
-{if $smarty.const.ACTIVE_PACKAGE ne "chatterbox" and $gBitUser->hasPermission( "bit_p_use_chatterbox" )}
+{if $smarty.const.ACTIVE_PACKAGE ne "chatterbox" and $gBitUser->hasPermission( "p_chatterbox_use" )}
 	{bitmodule title="$moduleTitle" name="chatterbox"}
 		{form id="chatForm" onsubmit="return false;" action="#"}
 			<input type="text" size="10" maxlength="30" name="name" id="name" {if $gBitUser->isRegistered()}value="{displayname hash=$gBitUser->mInfo nolink=1}" onblur="checkName();" disabled="disabled"{/if} />
