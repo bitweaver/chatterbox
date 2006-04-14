@@ -30,6 +30,6 @@ $gBitInstaller->registerUserPermissions( CHATTERBOX_PKG_NAME, array(
 ) );
 
 $gBitInstaller->registerPreferences( CHATTERBOX_PKG_NAME, array(
-	array( CHATTERBOX_PKG_NAME, 'prune_threshold', 604800 ),
+	array( CHATTERBOX_PKG_NAME, 'chatterbox_prune_threshold', 604800 ),
 ) );
 ?>

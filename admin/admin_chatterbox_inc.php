@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.4 2006/01/17 00:23:56 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.5 2006/04/14 20:25:51 squareing Exp $
 
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 
@@ -39,7 +39,7 @@ $pruneThreshold = array(
 $gBitSmarty->assign( 'pruneThreshold', $pruneThreshold );
 
 if( !empty( $_REQUEST['chatterbox_settings'] ) ) {
-	simple_set_value( 'prune_threshold', CHATTERBOX_PKG_NAME );
+	simple_set_value( 'chatterbox_prune_threshold', CHATTERBOX_PKG_NAME );
 	simple_set_int( 'online_user_timeout', CHATTERBOX_PKG_NAME );
 }
 ?>

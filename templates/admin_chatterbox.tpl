@@ -2,9 +2,9 @@
 {form legend="Chatterbox Settings"}
 	<input type="hidden" name="page" value="{$page}" />
 	<div class="row">
-		{formlabel label="Keep Chat Logs" for="prune_threshold"}
+		{formlabel label="Keep Chat Logs" for="chatterbox_prune_threshold"}
 		{forminput}
-			{html_options name="prune_threshold" options=$pruneThreshold values=$pruneThreshold selected=`$gBitSystem->getConfig('prune_threshold')` id=prune_threshold}
+			{html_options name="chatterbox_prune_threshold" options=$pruneThreshold values=$pruneThreshold selected=`$gBitSystem->getConfig('chatterbox_prune_threshold')` id=chatterbox_prune_threshold}
 			{formhelp note="Specify how far back you want to keep your chat logs for. Any entries older than the specified time will automatically be removed from the database."}
 		{/forminput}
 	</div>
