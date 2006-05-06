@@ -19,9 +19,6 @@ foreach( array_keys( $tables ) AS $tableName ) {
 $gBitInstaller->registerPackageInfo( CHATTERBOX_PKG_NAME, array(
 	'description' => "An AJAX based online chatting system. Based on <a href=\"http://www.plasticshore.com/projects/chat/\">XHTML live Chat by plasticshore</a>",
 	'license' => '<a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">Creative Commons</a>',
-	'version' => '0.1',
-	'state' => 'experimental',
-	'dependencies' => '',
 ) );
 
 // ### Default UserPermissions
