@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.6 $
+ * @version  $Revision: 1.7 $
  * @package  Pigeonholes
  * @subpackage functions
  */
@@ -15,7 +15,12 @@ $gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'chatterbox' ) ) {
 	if( $gBitUser->hasPermission( 'p_chatterbox_use' ) ) {
-		$gBitSystem->registerAppMenu( CHATTERBOX_PKG_NAME, ucfirst( CHATTERBOX_PKG_DIR ), CHATTERBOX_PKG_URL.'index.php', 'bitpackage:chatterbox/menu_chatterbox.tpl', CHATTERBOX_PKG_NAME );
+		$menuHash = array(
+			'package_name'  => CHATTERBOX_PKG_NAME,
+			'index_url'     => CHATTERBOX_PKG_URL.'index.php',
+			'menu_template' => 'bitpackage:chatterbox/menu_chatterbox.tpl',
+		);
+		$gBitSystem->registerAppMenu( $menuHash );
 	}
 }
 ?>
