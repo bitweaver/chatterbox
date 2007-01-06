@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.12 2006/03/01 20:16:04 spiderr Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/Chatterbox.php,v 1.13 2007/01/06 09:46:12 squareing Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,7 +17,7 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.12 $
+ * @version  $Revision: 1.13 $
  * @package  chatterbox
  */
 
@@ -55,7 +55,7 @@ class Chatterbox extends BitBase {
 		$ret['data'] = array();
 		// deal with sort_mode before prepGetList();
 		if( !empty( $pListHash['sort_mode'] ) ) {
-			$order = " ORDER BY ".$this->mDb->convert_sortmode( $pListHash['sort_mode'] );
+			$order = " ORDER BY ".$this->mDb->convertSortmode( $pListHash['sort_mode'] );
 		} else {
 			$order = " ORDER BY cb.`chatterbox_id` DESC";
 		}
