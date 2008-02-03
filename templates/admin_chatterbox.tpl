@@ -35,5 +35,5 @@ number of items: {$chatterbox.cant}
 	{include file="bitpackage:chatterbox/chatter_inc.tpl" chatter=$chatterbox.data datetime=TRUE}
 </ul>
 
-{libertypagination curPage=$curPage numPages=$numPages offset=$offset page=$page}
+{pagination curPage=$curPage numPages=$numPages offset=$offset page=$page}
 {/strip}
