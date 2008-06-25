@@ -9,5 +9,5 @@ $gChatterbox->pruneList( $gBitSystem->getConfig( 'chatterbox_prune_threshold', 6
 // Load common ajax library
 $gBitSmarty->assign( 'loadAjax', 'prototype' );
 // display template
-$gBitSystem->display( 'bitpackage:chatterbox/chatterbox.tpl', tra( 'Chat' ) );
+$gBitSystem->display( 'bitpackage:chatterbox/chatterbox.tpl', tra( 'Chat' ) , array( 'display_mode' => 'display' ));
 ?>
