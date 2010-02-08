@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/store_chat.php,v 1.4 2009/10/01 14:16:59 wjames5 Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_chatterbox/store_chat.php,v 1.5 2010/02/08 21:27:22 wjames5 Exp $
  *
  * +----------------------------------------------------------------------+
  * | Copyright ( c ) 2004, bitweaver.org
@@ -17,14 +17,14 @@
  * Chatterbox class
  *
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.4 $
+ * @version  $Revision: 1.5 $
  * @package  chatterbox
  */
 
 /**
  * required setup
  */
-require_once( '../bit_setup_inc.php' );
+require_once( '../kernel/setup_inc.php' );
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 
 $gChatterbox = new Chatterbox();
