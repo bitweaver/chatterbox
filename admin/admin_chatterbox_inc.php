@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_chatterbox/admin/admin_chatterbox_inc.php,v 1.5 2006/04/14 20:25:51 squareing Exp $
+// $Header$
 
 require_once( CHATTERBOX_PKG_PATH.'Chatterbox.php' );
 
