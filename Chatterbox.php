@@ -39,7 +39,7 @@ class Chatterbox extends BitBase {
 	* @access public
 	**/
 	function Chatterbox() {
-		BitBase::BitBase();
+		parent::__construct();
 		$this->mDate = new BitDate(0);
 	}
 
