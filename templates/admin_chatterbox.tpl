@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="control-group submit">
-		<input type="submit" name="chatterbox_settings" value="{tr}Change preferences{/tr}" />
+		<input type="submit" class="btn" name="chatterbox_settings" value="{tr}Change preferences{/tr}" />
 	</div>
 {/form}
 
