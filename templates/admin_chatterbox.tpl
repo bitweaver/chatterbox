@@ -18,10 +18,10 @@
 	</div>
 
 	<div class="form-group">
-		<label class="checkbox">
+		{forminput label="checkbox"}
 			<input type="checkbox" name="clear_logs" id="clear_logs" />Clear Logs
 			{formhelp note="Checking this box will remove all entries recorded in your database so far."}
-		</label>
+		{/forminput}
 	</div>
 
 	<div class="form-group submit">
